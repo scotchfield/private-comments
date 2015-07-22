@@ -137,7 +137,7 @@ class WP_PrivateComments {
 	public function set_private_meta( $user_id, $private ) {
 		update_user_meta( $user_id, $this->option, $private );
 
-		$comments = get_comments( array( 'post_author' => $user_id ) );
+		$comments = get_comments( array( 'user_id' => $user_id ) );
 
 		foreach ( $comments as $comment ) {
 			update_comment_meta( $comment->comment_ID, $this->option, $private );
