@@ -92,6 +92,10 @@ class WP_PrivateComments {
 	public function filter_comments( $comments ) {
 		global $wpdb;
 
+		if ( empty( $comments ) ) {
+			return $comments;
+		}
+
 		$comment_ids = array();
 
 		foreach ( $comments as $comment ) {
@@ -138,6 +142,13 @@ class WP_PrivateComments {
 		foreach ( $comments as $comment ) {
 			update_comment_meta( $comment->comment_ID, $this->option, $private );
 		}
+	}
+
+	/**
+	 * Expose a function to see whether or not a user's comments are private.
+	 */
+	public function get_private_meta( $user_id ) {
+		return get_comment_meta( $user_id, $this->option, true );
 	}
 }
 
