@@ -148,7 +148,7 @@ class WP_PrivateComments {
 	 * Expose a function to see whether or not a user's comments are private.
 	 */
 	public function get_private_meta( $user_id ) {
-		return get_comment_meta( $user_id, $this->option, true );
+		return get_user_meta( $user_id, $this->option, true );
 	}
 }
 
