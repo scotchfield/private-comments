@@ -38,6 +38,8 @@ class WP_PrivateComments {
 		add_action( 'show_user_profile', array( $this, 'user_profile' ) );
 		add_action( 'edit_user_profile', array( $this, 'user_profile' ) );
 		add_action( 'personal_options_update', array( $this, 'user_profile_update' ) );
+
+		add_filter( 'comments_array', array( $this, 'filter_comments' ) );
 	}
 
 	public static function get_instance() {
@@ -64,11 +66,35 @@ class WP_PrivateComments {
 	}
 
 	public function user_profile_update( $user_id ) {
+		$private = false;
+
 		if ( isset( $_POST[ 'private_comments' ] ) ) {
 			update_user_meta( $user_id, $this->option, true );
+			$private = true;
 		} else {
 			update_user_meta( $user_id, $this->option, false );
 		}
+
+		$comments = get_comments( array( 'post_author' => $user_id ) );
+
+		foreach ( $comments as $comment ) {
+			update_comment_meta( $comment->comment_ID, $this->option, $private );
+		}
+	}
+
+	public function filter_comments( $comments ) {
+		foreach ( $comments as $k => $comment ) {
+			if ( get_comment_meta( $comment->comment_ID, $this->option ) == true ) {
+				if ( current_user_can( 'manage_options' ) || $comment->user_id == get_current_user_id() ) {
+					$comment->comment_content = '(Private) ' . $comment->comment_content;
+					continue;
+				}
+
+				unset( $comments[ $k ] );
+			}
+		}
+
+		return $comments;
 	}
 }
 
