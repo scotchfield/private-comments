@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: Private Comments
+ * Plugin Name: Private User Comments
  * Plugin URI: http://scootah.com/
  * Description: Allow users to make their comments private (visible by themselves and admins)
  * Version: 1.0

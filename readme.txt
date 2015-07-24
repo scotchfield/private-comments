@@ -1,9 +1,9 @@
-=== Private Comments ===
+=== Private User Comments ===
 Contributors: sgrant
 Donate link: http://scootah.com/
-Tags: comments, private, private comments, privacy
+Tags: comments, private, private comments, user comments, private user comments, privacy
 Requires at least: 3.5
-Tested up to: 4.2.2
+Tested up to: 4.2.3
 Stable tag: 1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -16,7 +16,7 @@ Adds a checkbox to the user settings page to allow a user to set all of their co
 
 == Installation ==
 
-Place all the files in a directory inside of wp-content/plugins (for example, private-comments), and activate the plugin.
+Place all the files in a directory inside of wp-content/plugins (for example, private-user-comments), and activate the plugin.
 
 == Frequently Asked Questions ==
 
